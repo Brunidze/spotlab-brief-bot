@@ -1,0 +1,1 @@
+worker: python3 2spotlab_brief_bot.py
