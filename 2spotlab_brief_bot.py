@@ -108,7 +108,9 @@ async def step_values(message: types.Message, state: FSMContext):
         reply_markup=types.ReplyKeyboardRemove()
     )
     await state.finish()
-
+@dp.message_handler(commands=["getchatid"])
+async def get_chat_id(message: types.Message):
+    await message.answer(f"📌 Chat ID: `{message.chat.id}`", parse_mode="Markdown")
 
 if __name__ == '__main__':
     from aiogram import executor
