@@ -102,15 +102,19 @@ async def step_values(message: types.Message, state: FSMContext):
     await state.update_data(values=message.text)
     data = await state.get_data()
     summary = "\n".join([f"{k.capitalize()}: {v}" for k, v in data.items()])
+
+  
     await message.answer(
         f"Спасибо! Вот кратко о тебе:\n\n{summary}\n\n"
         f"Мы свяжемся с тобой в ближайшее время. Или напиши: @SpotLabADV",
         reply_markup=types.ReplyKeyboardRemove()
     )
+
+    
+    CHAT_ID = -1002633703555
+    await bot.send_message(CHAT_ID, f"📥 Новый бриф!\n\n{summary}")
+
     await state.finish()
-@dp.message_handler(commands=["getchatid"])
-async def get_chat_id(message: types.Message):
-    await message.answer(f"📌 Chat ID: `{message.chat.id}`", parse_mode="Markdown")
 
 if __name__ == '__main__':
     from aiogram import executor
